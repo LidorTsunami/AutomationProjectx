@@ -1,6 +1,8 @@
 package Core;
 
+import Mapping.LoginPage;
 import Utils.PropertyUtil;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +13,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public class BaseDriver {
@@ -62,5 +65,36 @@ public class BaseDriver {
     }
     public void stopSession() {
         driver.quit();
+    }
+
+    //Login Page Functions
+    public void validLogin() throws InterruptedException {
+        Thread.sleep(2000);
+        LoginPage.UserNameField.sendKeys("Admin");
+        LoginPage.PasswordField.sendKeys("admin123");
+        LoginPage.SignInButton.click();
+        Thread.sleep(3000);
+        boolean present;
+        try {
+            driver.findElement(By.xpath("//*[@id=\'app\']/div[1]/div[1]/aside/nav/div[2]/ul/li[1]/a"));
+            present = true;
+        } catch (NoSuchElementException e) {
+            present = false;
+        }
+        Thread.sleep(3000);
+    }
+    public void InvalidUserName() throws InterruptedException {
+        Thread.sleep(2000);
+        LoginPage.UserNameField.sendKeys("Lidor");
+        LoginPage.PasswordField.sendKeys("admin123");
+        LoginPage.SignInButton.click();
+        Thread.sleep(3000);
+    }
+    public void InvalidPassword() throws InterruptedException {
+        Thread.sleep(2000);
+        LoginPage.UserNameField.sendKeys("Admin");
+        LoginPage.PasswordField.sendKeys("Lidor");
+        LoginPage.SignInButton.click();
+        Thread.sleep(3000);
     }
 }
