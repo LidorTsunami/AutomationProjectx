@@ -1,5 +1,6 @@
 package Core;
 
+import Mapping.DashboardPage;
 import Mapping.LoginPage;
 import Utils.PropertyUtil;
 import org.openqa.selenium.By;
@@ -95,6 +96,20 @@ public class BaseDriver {
         LoginPage.UserNameField.sendKeys("Admin");
         LoginPage.PasswordField.sendKeys("Lidor");
         LoginPage.SignInButton.click();
+        Thread.sleep(3000);
+    }
+    //DashboardPage
+
+    public void SearchFieldTest() throws InterruptedException {
+        DashboardPage.SearchField.sendKeys("Admin");
+        Thread.sleep(3000);
+        boolean present;
+        try {
+            driver.findElement(By.xpath("//*[@id=\'app\']/div[1]/div[1]/aside/nav/div[2]/ul/li/a"));
+            present = true;
+        } catch (NoSuchElementException e) {
+            present = false;
+        }
         Thread.sleep(3000);
     }
 }
