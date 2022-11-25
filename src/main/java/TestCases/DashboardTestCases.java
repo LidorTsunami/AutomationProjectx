@@ -53,7 +53,8 @@ public class DashboardTestCases extends BaseDriver {
     @Test(priority = 8)
     public void EnterDashboardPageTest() throws InterruptedException {
         EnterDashboardPage();
-    }    @Test(priority = 9)
+    }
+    @Test(priority = 9)
     public void EnterDirectoryPageTest() throws InterruptedException {
         EnterDirectoryPage();
     }
